@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Package & Deploy Serverless Functions using SAM Template & Cloudformation (via AWS CLI)    
+Resources:
+  loggerFunc:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: logging/
+      Handler: logger.handler
+      MemorySize: 128
+      Runtime: nodejs12.7
+      Timeout: 3
+  addFunc:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: operation/
+      Handler: add.handler
+      MemorySize: 128
+      Runtime: nodejs12.7
+      Timeout: 5
+
+
