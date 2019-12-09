@@ -18,5 +18,10 @@ Resources:
     Properties:
       CodeUri: operation/
       Handler: add.handler
-
-
+  
+  # the following way is to create an API in an explicit way (definition of the API is within the swagger file)
+  dummyTestAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dummyTest
+      DefinitionUri: someDummySwaggerFile.yml
