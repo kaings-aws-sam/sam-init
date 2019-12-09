@@ -13,15 +13,23 @@ Resources:
       CodeUri: logging/
       Handler: logger.handler
       Timeout: 3  # this will overwrite Globals section Timeout property
+      # create API implicitly
+      Events:
+        GetLogs:
+          Type: Api
+          Properties:
+            Path: /logs
+            Method: get
+
   addFunc:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: operation/
       Handler: add.handler
-  
-  # the following way is to create an API in an explicit way (definition of the API is within the swagger file)
-  dummyTestAPI:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: dummyTest
-      DefinitionUri: someDummySwaggerFile.yml
+      # create API implicitly
+      Events:
+        PostAdd:
+          Type: Api
+          Properties:
+            Path: /add
+            Method: post
