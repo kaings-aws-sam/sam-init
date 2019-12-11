@@ -20,6 +20,17 @@ Resources:
           Properties:
             Path: /logs
             Method: get
+        # add S3 file upload event trigger
+        MyFileUpload:
+          Type: S3
+          Properties:
+            Bucket: !Ref MyBucketSAMInit  # reference to MyBucketSAMInit
+            Events: s3:ObjectCreated:*    # event triggered when file is uploaded to S3 bucket
+
+  # reference of the bucket of MyFileUpload event trigger
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_S3.html
+  MyBucketSAMInit:
+    Type: AWS::S3::Bucket
 
   addFunc:
     Type: AWS::Serverless::Function
