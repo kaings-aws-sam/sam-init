@@ -4,7 +4,7 @@ Description: Package & Deploy Serverless Functions using SAM Template & Cloudfor
 Globals:
   Function:
     MemorySize: 128
-    Runtime: nodejs12.7
+    Runtime: nodejs8.10.0
     Timeout: 5
 Resources:
   loggerFunc:
