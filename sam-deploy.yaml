@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Package & Deploy Serverless Functions using SAM Template & Cloudformation
+  (via AWS CLI)
+Globals:
+  Function:
+    MemorySize: 128
+    Runtime: nodejs8.10
+    Timeout: 5
+Resources:
+  loggerFunc:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-init/c7c55b6c236617b45664cc8ae24bcf51
+      Handler: logger.handler
+      Timeout: 3
+      Events:
+        GetLogs:
+          Type: Api
+          Properties:
+            Path: /logs
+            Method: get
+        MyFileUpload:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: MyBucketSAMInit
+            Events: s3:ObjectCreated:*
+  MyBucketSAMInit:
+    Type: AWS::S3::Bucket
+  addFunc:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://sam-init/0d93bb3687f88ac0db474423ca891ca5
+      Handler: add.handler
+      Events:
+        PostAdd:
+          Type: Api
+          Properties:
+            Path: /add
+            Method: post
