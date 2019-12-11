@@ -1,0 +1,4 @@
+To Deploy:
+aws cloudformation deploy --template-file sam-deploy.yaml --stack-name <STACK NAME> --capabilities CAPABILITY_IAM
+
+**nodejs runtime version MUST match AWS Lambda Runtime enum version, or else it will fail
